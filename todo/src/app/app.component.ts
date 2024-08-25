@@ -3,6 +3,8 @@ import { RouterOutlet } from '@angular/router';
 import { WelcomeComponent } from './welcome/welcome.component';
 import { LoginComponent } from './login/login.component';
 import { ListTodosComponent } from './list-todos/list-todos.component';
+import { FooterComponent } from "./footer/footer.component";
+import { MenuComponent } from "./menu/menu.component";
 
 @Component({
   selector: 'app-root',
@@ -12,7 +14,9 @@ import { ListTodosComponent } from './list-todos/list-todos.component';
     WelcomeComponent,
     LoginComponent,
     ListTodosComponent,
-  ],
+    FooterComponent,
+    MenuComponent
+],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css',
 })
