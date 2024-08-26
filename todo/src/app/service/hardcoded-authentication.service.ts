@@ -1,25 +1,33 @@
-import { Injectable } from '@angular/core';
+import { Injectable, Inject, PLATFORM_ID } from '@angular/core';
+import { isPlatformBrowser } from '@angular/common';
 
 @Injectable({
   providedIn: 'root',
 })
 export class HardcodedAuthenticationService {
-  constructor() {}
+  constructor(@Inject(PLATFORM_ID) private platformId: Object) {}
 
   authenticate(username: string, password: string) {
     if (username === 'candy' && password === 'dummy') {
-      sessionStorage.setItem('authenticatedUser', username);
+      if (isPlatformBrowser(this.platformId)) {
+        sessionStorage.setItem('authenticatedUser', username);
+      }
       return true;
     }
     return false;
   }
 
   isUserLoggedIn() {
-    let user = sessionStorage.getItem('authenticatedUser');
-    return !(user===null);
+    if (isPlatformBrowser(this.platformId)) {
+      let user = sessionStorage.getItem('authenticatedUser');
+      return !(user === null);
+    }
+    return false;
   }
 
   logout() {
-    sessionStorage.removeItem('authenticatedUser');
+    if (isPlatformBrowser(this.platformId)) {
+      sessionStorage.removeItem('authenticatedUser');
+    }
   }
 }
